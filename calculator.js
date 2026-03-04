@@ -25,6 +25,18 @@ function percentage(a, b) {
   return (a / 100) * b;
 }
 
+function sin(a) {
+  return Math.sin((a * Math.PI) / 180);
+}
+
+function cos(a) {
+  return Math.cos((a * Math.PI) / 180);
+}
+
+function tan(a) {
+  return Math.tan((a * Math.PI) / 180);
+}
+
 function prompt(question) {
   return new Promise((resolve) => rl.question(question, resolve));
 }
@@ -36,18 +48,43 @@ async function main() {
   console.log("3. Multiplication");
   console.log("4. Logarithm (ln)");
   console.log("5. Percentage");
-  console.log("6. Exit\n");
+  console.log("6. Sin");
+  console.log("7. Cos");
+  console.log("8. Tan");
+  console.log("9. Exit\n");
 
-  const choice = await prompt("Choose an operation (1-6): ");
+  const choice = await prompt("Choose an operation (1-9): ");
 
-  if (choice === "6") {
+  if (choice === "9") {
     console.log("Goodbye!");
     rl.close();
     return;
   }
 
-  if (!["1", "2", "3", "4", "5"].includes(choice)) {
+  if (!["1", "2", "3", "4", "5", "6", "7", "8"].includes(choice)) {
     console.log("Invalid choice. Try again.");
+    return main();
+  }
+
+  if (["6", "7", "8"].includes(choice)) {
+    const angle = parseFloat(await prompt("Enter angle in degrees: "));
+    if (isNaN(angle)) {
+      console.log("Invalid number. Try again.");
+      return main();
+    }
+    let result;
+    let funcName;
+    if (choice === "6") {
+      result = sin(angle);
+      funcName = "sin";
+    } else if (choice === "7") {
+      result = cos(angle);
+      funcName = "cos";
+    } else {
+      result = tan(angle);
+      funcName = "tan";
+    }
+    console.log(`\n${funcName}(${angle}°) = ${result}`);
     return main();
   }
 
