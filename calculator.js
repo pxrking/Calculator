@@ -21,6 +21,10 @@ function log(a) {
   return Math.log(a);
 }
 
+function percentage(a, b) {
+  return (a / 100) * b;
+}
+
 function prompt(question) {
   return new Promise((resolve) => rl.question(question, resolve));
 }
@@ -31,18 +35,31 @@ async function main() {
   console.log("2. Subtraction");
   console.log("3. Multiplication");
   console.log("4. Logarithm (ln)");
-  console.log("5. Exit\n");
+  console.log("5. Percentage");
+  console.log("6. Exit\n");
 
-  const choice = await prompt("Choose an operation (1-5): ");
+  const choice = await prompt("Choose an operation (1-6): ");
 
-  if (choice === "5") {
+  if (choice === "6") {
     console.log("Goodbye!");
     rl.close();
     return;
   }
 
-  if (!["1", "2", "3", "4"].includes(choice)) {
+  if (!["1", "2", "3", "4", "5"].includes(choice)) {
     console.log("Invalid choice. Try again.");
+    return main();
+  }
+
+  if (choice === "5") {
+    const num1 = parseFloat(await prompt("Enter the percentage: "));
+    const num2 = parseFloat(await prompt("Enter the number: "));
+    if (isNaN(num1) || isNaN(num2)) {
+      console.log("Invalid numbers. Try again.");
+      return main();
+    }
+    const result = percentage(num1, num2);
+    console.log(`\n${num1}% of ${num2} = ${result}`);
     return main();
   }
 
