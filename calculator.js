@@ -17,8 +17,12 @@ function multiply(a, b) {
   return a * b;
 }
 
-function log(a) {
+function ln(a) {
   return Math.log(a);
+}
+
+function log10(a) {
+  return Math.log10(a);
 }
 
 function percentage(a, b) {
@@ -46,27 +50,28 @@ async function main() {
   console.log("1. Addition");
   console.log("2. Subtraction");
   console.log("3. Multiplication");
-  console.log("4. Logarithm (ln)");
-  console.log("5. Percentage");
-  console.log("6. Sin");
-  console.log("7. Cos");
-  console.log("8. Tan");
-  console.log("9. Exit\n");
+  console.log("4. Natural Log (ln)");
+  console.log("5. Log Base 10 (log10)");
+  console.log("6. Percentage");
+  console.log("7. Sin");
+  console.log("8. Cos");
+  console.log("9. Tan");
+  console.log("10. Exit\n");
 
-  const choice = await prompt("Choose an operation (1-9): ");
+  const choice = await prompt("Choose an operation (1-10): ");
 
-  if (choice === "9") {
+  if (choice === "10") {
     console.log("Goodbye!");
     rl.close();
     return;
   }
 
-  if (!["1", "2", "3", "4", "5", "6", "7", "8"].includes(choice)) {
+  if (!["1", "2", "3", "4", "5", "6", "7", "8", "9"].includes(choice)) {
     console.log("Invalid choice. Try again.");
     return main();
   }
 
-  if (["6", "7", "8"].includes(choice)) {
+  if (["7", "8", "9"].includes(choice)) {
     const angle = parseFloat(await prompt("Enter angle in degrees: "));
     if (isNaN(angle)) {
       console.log("Invalid number. Try again.");
@@ -74,10 +79,10 @@ async function main() {
     }
     let result;
     let funcName;
-    if (choice === "6") {
+    if (choice === "7") {
       result = sin(angle);
       funcName = "sin";
-    } else if (choice === "7") {
+    } else if (choice === "8") {
       result = cos(angle);
       funcName = "cos";
     } else {
@@ -88,7 +93,7 @@ async function main() {
     return main();
   }
 
-  if (choice === "5") {
+  if (choice === "6") {
     const num1 = parseFloat(await prompt("Enter the percentage: "));
     const num2 = parseFloat(await prompt("Enter the number: "));
     if (isNaN(num1) || isNaN(num2)) {
@@ -106,8 +111,19 @@ async function main() {
       console.log("Invalid input. Logarithm requires a positive number.");
       return main();
     }
-    const result = log(num);
+    const result = ln(num);
     console.log(`\nln(${num}) = ${result}`);
+    return main();
+  }
+
+  if (choice === "5") {
+    const num = parseFloat(await prompt("Enter a number: "));
+    if (isNaN(num) || num <= 0) {
+      console.log("Invalid input. Log10 requires a positive number.");
+      return main();
+    }
+    const result = log10(num);
+    console.log(`\nlog10(${num}) = ${result}`);
     return main();
   }
 
