@@ -17,6 +17,10 @@ function multiply(a, b) {
   return a * b;
 }
 
+function log(a) {
+  return Math.log(a);
+}
+
 function prompt(question) {
   return new Promise((resolve) => rl.question(question, resolve));
 }
@@ -26,18 +30,30 @@ async function main() {
   console.log("1. Addition");
   console.log("2. Subtraction");
   console.log("3. Multiplication");
-  console.log("4. Exit\n");
+  console.log("4. Logarithm (ln)");
+  console.log("5. Exit\n");
 
-  const choice = await prompt("Choose an operation (1-4): "); 
+  const choice = await prompt("Choose an operation (1-5): ");
 
-  if (choice === "4") {
+  if (choice === "5") {
     console.log("Goodbye!");
     rl.close();
     return;
   }
 
-  if (!["1", "2", "3"].includes(choice)) {
+  if (!["1", "2", "3", "4"].includes(choice)) {
     console.log("Invalid choice. Try again.");
+    return main();
+  }
+
+  if (choice === "4") {
+    const num = parseFloat(await prompt("Enter a number: "));
+    if (isNaN(num) || num <= 0) {
+      console.log("Invalid input. Logarithm requires a positive number.");
+      return main();
+    }
+    const result = log(num);
+    console.log(`\nln(${num}) = ${result}`);
     return main();
   }
 
