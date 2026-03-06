@@ -15,15 +15,14 @@ body {
 
 .calculator {
     background-color: #16213e;
-    border-radius: 16px;
+    border-radius: 20px;
     padding: 24px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    width: 360px;
 }
 
 .display {
     background-color: #0f3460;
-    border-radius: 12px;
+    border-radius: 16px;
     padding: 20px;
     margin-bottom: 20px;
     text-align: right;
@@ -47,17 +46,33 @@ body {
     word-wrap: break-word;
 }
 
+/* Side-by-side layout: scientific panel on left, number pad on right */
+.calculator-body {
+    display: flex;
+    gap: 10px;
+}
+
+/* Scientific functions stacked vertically on the left */
+.scientific-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Number pad and operators in a 4-column grid */
 .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
+    flex: 1;
 }
 
+/* Base button style — curved edges */
 .btn {
     padding: 18px;
     font-size: 18px;
     border: none;
-    border-radius: 10px;
+    border-radius: 50px;
     cursor: pointer;
     background-color: #1a1a4e;
     color: #e2e2e2;
@@ -92,6 +107,7 @@ body {
 .btn.equals {
     background-color: #0f9b58;
     color: white;
+    grid-row: span 2;
 }
 
 .btn.equals:hover {
@@ -102,27 +118,14 @@ body {
     background-color: #533483;
     color: white;
     font-size: 14px;
+    padding: 14px 20px;
 }
 
 .btn.scientific:hover {
     background-color: #7b4fb5;
 }
 
-/* Scientific row spans all 5 buttons across 4 columns */
-.buttons {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-.btn.scientific:nth-child(5) {
-    grid-column: span 1;
-}
-
-/* First row of scientific buttons: 5 buttons in 4 columns */
-.btn.scientific:first-child {
-    grid-column: span 1;
-}
-
 /* Zero button spans 2 columns */
 .btn.zero {
-    grid-column: span 2;
+    grid-column: span 3;
 }
