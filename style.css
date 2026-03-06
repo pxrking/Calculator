@@ -9,19 +9,58 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #1a1a2e;
+    background-color: #f5e6d3;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.calculator {
-    background-color: #16213e;
-    border-radius: 20px;
-    padding: 24px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+/* The whole boba cup container */
+.boba-cup {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+/* Straw sticking out the top */
+.straw {
+    width: 14px;
+    height: 80px;
+    background: linear-gradient(180deg, #e94560, #c0392b);
+    border-radius: 4px;
+    position: relative;
+    z-index: 2;
+    margin-bottom: -20px;
+    transform: rotate(8deg);
+    margin-left: 40px;
+}
+
+/* Lid */
+.lid {
+    width: 340px;
+    height: 20px;
+    background: linear-gradient(180deg, #e8ddd3, #d4c5b5);
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+    margin-bottom: -10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Cup body — shaped like a boba cup (wider at top, narrower at bottom) */
+.calculator {
+    background: linear-gradient(180deg, #fdf1e5 0%, #f0dcc8 40%, #d4a574 100%);
+    border-radius: 8px 8px 30px 30px;
+    padding: 24px;
+    box-shadow: 0 8px 32px rgba(101, 67, 33, 0.3);
+    border: 3px solid rgba(139, 94, 60, 0.3);
+    width: 340px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Milk tea display area */
 .display {
-    background-color: #0f3460;
+    background-color: rgba(255, 248, 240, 0.8);
     border-radius: 16px;
     padding: 20px;
     margin-bottom: 20px;
@@ -30,23 +69,24 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    border: 2px solid #c4956a;
 }
 
 .display-expression {
-    color: #a8a8b3;
+    color: #8b5e3c;
     font-size: 16px;
     min-height: 24px;
     word-wrap: break-word;
 }
 
 .display-result {
-    color: #e2e2e2;
+    color: #3e2723;
     font-size: 36px;
     font-weight: bold;
     word-wrap: break-word;
 }
 
-/* Side-by-side layout: scientific panel on left, number pad on right */
+/* Side-by-side layout */
 .calculator-body {
     display: flex;
     gap: 10px;
@@ -67,65 +107,84 @@ body {
     flex: 1;
 }
 
-/* Base button style — curved edges */
+/* Base button style — perfectly round like boba pearls */
 .btn {
-    padding: 18px;
-    font-size: 18px;
+    width: 52px;
+    height: 52px;
+    font-size: 16px;
     border: none;
-    border-radius: 50px;
+    border-radius: 50%;
     cursor: pointer;
-    background-color: #1a1a4e;
-    color: #e2e2e2;
-    transition: background-color 0.2s;
+    background: radial-gradient(circle at 35% 35%, #c4956a, #a0724c);
+    color: #3e2723;
+    transition: transform 0.1s, box-shadow 0.2s;
+    font-weight: 700;
+    box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
 }
 
 .btn:hover {
-    background-color: #2a2a6e;
+    transform: scale(1.1);
+    box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25);
 }
 
 .btn:active {
-    background-color: #3a3a8e;
+    transform: scale(0.9);
 }
 
+/* Number buttons — dark tapioca pearls */
 .btn.number {
-    background-color: #222244;
+    background: radial-gradient(circle at 35% 35%, #5d4037, #2c1810);
+    color: #fdf1e5;
+    box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.4), 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
 .btn.number:hover {
-    background-color: #333366;
+    background: radial-gradient(circle at 35% 35%, #6d4c41, #3e2723);
 }
 
+/* Operator buttons — brown sugar pearls */
 .btn.operator {
-    background-color: #e94560;
-    color: white;
+    background: radial-gradient(circle at 35% 35%, #8b5e3c, #5d3a1a);
+    color: #fdf1e5;
 }
 
 .btn.operator:hover {
-    background-color: #ff6b81;
+    background: radial-gradient(circle at 35% 35%, #a0724c, #6d4426);
 }
 
+/* Equals button — matcha green pearl */
 .btn.equals {
-    background-color: #0f9b58;
-    color: white;
+    background: radial-gradient(circle at 35% 35%, #7da36a, #4a6e3a);
+    color: #fdf1e5;
     grid-row: span 2;
+    height: auto;
+    border-radius: 26px;
 }
 
 .btn.equals:hover {
-    background-color: #12b568;
+    background: radial-gradient(circle at 35% 35%, #8db87a, #5a7e4a);
 }
 
+/* Scientific buttons — taro purple pearls */
 .btn.scientific {
-    background-color: #533483;
-    color: white;
-    font-size: 14px;
-    padding: 14px 20px;
+    background: radial-gradient(circle at 35% 35%, #9181a0, #5c4d6e);
+    color: #fdf1e5;
+    font-size: 12px;
+    width: 52px;
+    height: 52px;
 }
 
 .btn.scientific:hover {
-    background-color: #7b4fb5;
+    background: radial-gradient(circle at 35% 35%, #a595b5, #6d5e80);
 }
 
-/* Zero button spans 2 columns */
+/* Zero button — elongated pearl */
 .btn.zero {
     grid-column: span 3;
+    width: auto;
+    border-radius: 26px;
 }
