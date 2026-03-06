@@ -134,3 +134,32 @@ document.querySelectorAll(".btn").forEach(button => {
         }
     });
 });
+
+// Keyboard support
+document.addEventListener("keydown", (e) => {
+    if (e.key >= "0" && e.key <= "9" || e.key === ".") {
+        handleNumber(e.key);
+    } else if (e.key === "+") {
+        handleOperator("add");
+    } else if (e.key === "-") {
+        handleOperator("subtract");
+    } else if (e.key === "*") {
+        handleOperator("multiply");
+    } else if (e.key === "/") {
+        e.preventDefault();
+        handleOperator("divide");
+    } else if (e.key === "Enter" || e.key === "=") {
+        calculate();
+    } else if (e.key === "Backspace") {
+        currentInput = currentInput.length > 1 ? currentInput.slice(0, -1) : "0";
+        updateDisplay();
+    } else if (e.key === "Escape") {
+        currentInput = "0";
+        previousInput = "";
+        operator = null;
+        shouldResetDisplay = false;
+        updateDisplay();
+    } else if (e.key === "%") {
+        handlePercentage();
+    }
+});
